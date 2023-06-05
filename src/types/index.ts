@@ -19,7 +19,7 @@ export type Parameters = {
     total: number;
   };
   /** Descuentos especiales, como juvilado */
-  bonus: ['retired'];
+  bonus: string[];
 };
 
 /** ## Tipado del objeto que guardamos en la DB */
@@ -32,31 +32,7 @@ export type CTSearch = {
      * y roundtrip si tiene 2 journey y vuelve al mismo sitio desde el que salió  */
     type: 'oneway' | 'roundtrip' | 'multidestination';
     /** Array con cada uno de los viajes, recordemos que si es roundtrip seran 2 */
-    journeys: {
-      /** Información de salida */
-      departure: {
-        /** Fecha en formato DD/MM/YYYY */
-        date: string;
-        /** Hora en formato HH:mm */
-        time: string;
-        /** Codigo de la estacion (nuestros codigos, no los de proveedor) */
-        station: string;
-      };
-      /** Información de llegada */
-      arrival: {
-        /** Fecha en formato DD/MM/YYYY */
-        date: string;
-        /** Hora en formato HH:mm */
-        time: string;
-        /** Codigo de la estacion (nuestros codigos, no los de proveedor) */
-        station: string;
-      };
-      /** Duracion del viaje */
-      duration: {
-        hours: number;
-        minutes: number;
-      };
-    }[];
+    journeys: CTSearchJourney[];
     /** Objeto de acomodacion seleccionada */
     accommodations: {
       /** Codigo de la acomodacion ej: Estandar, Confort, Premiun, ... */
@@ -79,5 +55,31 @@ export type CTSearch = {
       /** Precio por cada niño */
       children: number;
     };
+  };
+};
+
+export type CTSearchJourney = {
+  /** Información de salida */
+  departure: {
+    /** Fecha en formato DD/MM/YYYY */
+    date: string;
+    /** Hora en formato HH:mm */
+    time: string;
+    /** Codigo de la estacion (nuestros codigos, no los de proveedor) */
+    station: string;
+  };
+  /** Información de llegada */
+  arrival: {
+    /** Fecha en formato DD/MM/YYYY */
+    date: string;
+    /** Hora en formato HH:mm */
+    time: string;
+    /** Codigo de la estacion (nuestros codigos, no los de proveedor) */
+    station: string;
+  };
+  /** Duracion del viaje */
+  duration: {
+    hours: number;
+    minutes: number;
   };
 };
